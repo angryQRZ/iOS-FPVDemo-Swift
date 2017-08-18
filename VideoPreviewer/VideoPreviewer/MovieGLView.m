@@ -545,7 +545,7 @@ NSString *const renderToScreenFS = SHADER_STRING
                 _block_copy(image);
             }
         });
-        _snapshotCallback = nil;
+        //_snapshotCallback = nil;
     }
     
     //snapshot thumbnail
