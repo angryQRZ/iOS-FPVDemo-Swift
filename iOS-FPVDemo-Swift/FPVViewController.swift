@@ -6,11 +6,20 @@
 import UIKit
 import DJISDK
 import VideoPreviewer
-
+import CoreImage
+import MetalKit
+import ImageIO
 class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerDelegate, DJIBaseProductDelegate, DJICameraDelegate {
     
     var isRecording : Bool!
     var camera : DJICamera!
+    
+    @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
+        let point = sender.location(in: self.fpvView)
+        print(point.x, point.y)
+    }
+    @IBOutlet weak var blurLabel: UILabel!
+    @IBOutlet weak var thresholdLabel: UILabel!
     
     @IBOutlet var recordTimeLabel: UILabel!
     
@@ -20,30 +29,59 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     
     @IBOutlet var recordModeSegmentControl: UISegmentedControl!
     
+    @IBOutlet weak var snapshotView: UIImageView!
     @IBOutlet var fpvView: UIView!
+    let ciConext: CIContext = CIContext()
+    
+    @IBAction func changeThreshold(_ sender: UISlider) {
+        VideoPreviewer.instance().overExposedWarningThreshold = sender.value
+        thresholdLabel.text = String(sender.value)
+    }
+    var ciFilter: CIFilter!
+    
+    var ciImage: CIImage!
+    
+    var opts = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
+    
+    var detctor: CIDetector!
+    
+    var feature: [CIFaceFeature]!
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         VideoPreviewer.instance().setView(self.fpvView)
-        
+        //VideoPreviewer.instance().rotation = VideoStreamRotationType.CW180
+        //VideoPreviewer.instance().enableFocusWarning = true
+        //VideoPreviewer.instance().overExposedWarningThreshold = 0.5
+        //VideoPreviewer.instance().enableFocusWarning = true
+        //VideoPreviewer.instance().enableHSB = true
+        VideoPreviewer.instance().focusWarningThreshold = 0.9
         DJISDKManager.registerApp(with: self)
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         VideoPreviewer.instance().setView(nil)
         DJISDKManager.videoFeeder()?.primaryVideoFeed.remove(self)
-
     }
+    
+    //    func takeSnapShot(_ image: UIImage?){
+    //        UIImageWriteToSavedPhotosAlbum(OpenCVWrapper.processImage(image!), nil, nil, nil)
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        recordTimeLabel.isHidden = true
+        //recordTimeLabel.isHidden = true
+        detctor = CIDetector(ofType: CIDetectorTypeFace, context: ciConext, options: opts)
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -78,6 +116,7 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
         return(dateFormatter.string(from: date))
     }
     
+    
     //
     //  DJIBaseProductDelegate
     //
@@ -96,7 +135,7 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
                 camera!.delegate = self
                 
                 VideoPreviewer.instance().start()
-
+                
             }
         }
     }
@@ -104,7 +143,7 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     func productDisconnected() {
         
         NSLog("Product Disconnected")
-
+        
         camera = nil
         
         VideoPreviewer.instance().clearVideoData()
@@ -125,6 +164,7 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
         }
         
         DJISDKManager.startConnectionToProduct()
+        //DJISDKManager.enableBridgeMode(withBridgeAppIP: "10.89.165.231")
         DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
         
     }
@@ -161,7 +201,6 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
         
         let videoData = rawData as NSData
         let videoBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: videoData.length)
-        
         videoData.getBytes(videoBuffer, length: videoData.length)
         
         
@@ -170,24 +209,59 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
     
     //
     //  IBAction Methods
-    //    
+    //
     
     @IBAction func captureAction(_ sender: UIButton) {
-       
+        
         if (camera != nil) {
-            camera.setMode(DJICameraMode.shootPhoto, withCompletion: { (error) in
-                
-                if (error != nil) {
-                    NSLog("Set Photo Mode Error: " + String(describing: error))
-                }
             
-                self.camera.startShootPhoto(completion: { (error) in
-                    if (error != nil) {
-                        NSLog("Shoot Photo Mode Error: " + String(describing: error))
-                    }
-                })
-            })
+            //snapshotView.image = UIImage.init(view: self.fpvView)
+            //UIImageWriteToSavedPhotosAlbum(UIImage.init(view: self.fpvView), nil, nil, nil);
+            //VideoPreviewer.instance().pause()
+            VideoPreviewer.instance().snapshotPreview{ [weak self] in
+                //self?.snapshotView.image = OpenCVWrapper.processImage($0)
+                //self?.snapshotView.image = $0
+//                self?.ciFilter = CIFilter(name: "CIExposureAdjust")
+//                self?.ciFilter.setValue( -0.3, forKey: kCIInputEVKey)
+//                self?.ciFilter.setValue(CIImage(image: $0!), forKey: kCIInputImageKey)
+//                let cgImage = self?.ciConext.createCGImage((self?.ciFilter.outputImage!)!, from: (self?.ciFilter.outputImage!.extent)!)
+//                self?.snapshotView.image = UIImage(cgImage: cgImage!)
+                //let rect = CGRect(x: (self?.fpvView.bounds.midX)! + 50, y: (self?.fpvView.bounds.midY)! + 50, width: 100, height: 100)
+                let point = CGPoint(x: ($0?.cgImage?.width)! / 2 - 50, y: ($0?.cgImage?.height)! / 2 - 50)
+                let rect = CGRect(origin: point, size: CGSize(width: 100.0, height: 100.0))
+                self?.fpvView.setNeedsDisplay()
+                let cgImage = $0?.cgImage?.cropping(to: rect)
+                
+                self?.snapshotView.image = UIImage(cgImage: cgImage!)
+                self?.blurLabel.text = String(OpenCVWrapper.processImage($0))
+
+                //self?.snapshotView.image = $0
+//                let ciImage = CIImage(image: (self?.snapshotView.image)!)
+//                if let orientation = ciImage!.properties[kCGImagePropertyOrientation as String]{
+//                    self?.feature = self?.detctor.features(in: ciImage!, options: [CIDetectorImageOrientation: orientation]) as! [CIFaceFeature]
+//                } else {
+//                    self?.feature = self?.detctor.features(in: ciImage!) as! [CIFaceFeature]
+//                }
+//                NSLog("NO")
+//
+//                if !(self?.feature.isEmpty)!{
+//                    NSLog("hello")
+//                    for faceFeature in (self?.feature)! {
+//                        let faceView = UIView(frame: faceFeature.bounds)
+//                        faceView.layer.borderColor = (UIColor.orange as! CGColor)
+//                        faceView.layer.borderWidth = 2
+//                        
+//                        self?.snapshotView.addSubview(faceView)
+//                    }
+//                }
+//                NSLog("exit")
+                
+                
+            }
+            //sleep(2)
+            //VideoPreviewer.instance().snapshotPreview(nil)
         }
+        
     }
     
     @IBAction func recordAction(_ sender: UIButton) {
@@ -230,5 +304,28 @@ class FPVViewController: UIViewController,  DJIVideoFeedListener, DJISDKManagerD
             }
         }
     }
-
+    
+}
+extension UIView {
+    
+    func snapshotView(view: UIView, afterUpdates: Bool) -> UIView {
+        let snapshot = view.snapshotView(afterScreenUpdates: afterUpdates)
+        //self.addSubview(snapshot!)
+        let snapBound = CGRect(x: 0, y: 0, width: view.bounds.width / 2.0, height: view.bounds.height / 2.0)
+        snapshot!.frame = convert(snapBound, from: view)
+        return snapshot!
+    }
+    
+    func snapshotViews(views: [UIView], afterUpdates: Bool) -> [UIView] {
+        return views.map { snapshotView(view: $0, afterUpdates: afterUpdates) }
+    }
+}
+extension UIImage {
+    convenience init(view: UIView) {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: false)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.init(cgImage: (image?.cgImage)!)
+    }
 }
