@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y5h-KL-TjC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y5h-KL-TjC">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,83 +21,135 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAG-NF-7rh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAG-NF-7rh" customClass="FocusView" customModule="iOS_FPVDemo_Swift" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZAE-YY-Fg8">
-                                        <rect key="frame" x="397" y="330" width="250" height="29"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Toj-97-8o3">
+                                        <rect key="frame" x="274" y="337" width="118" height="31"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="p6V-G1-46z"/>
+                                            <constraint firstAttribute="width" constant="114" id="Yns-XQ-BgG"/>
                                         </constraints>
-                                        <segments>
-                                            <segment title="CaptureMode"/>
-                                            <segment title="RecordMode"/>
-                                        </segments>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <connections>
-                                            <action selector="recordModeSegmentChange:" destination="Y5h-KL-TjC" eventType="valueChanged" id="fNW-vq-r3e"/>
+                                            <action selector="changeThreshold:" destination="Y5h-KL-TjC" eventType="valueChanged" id="EEQ-YR-plO"/>
                                         </connections>
-                                    </segmentedControl>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bz-n9-TyD">
+                                        <rect key="frame" x="180.5" y="333" width="37.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" red="1" green="0.34371946110000001" blue="0.4592465838" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r29-Hw-zZO">
+                                        <rect key="frame" x="631" y="176.5" width="28" height="23.5"/>
+                                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="20"/>
+                                        <color key="textColor" red="1" green="0.34371946110000001" blue="0.4592465838" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="Toj-97-8o3" firstAttribute="bottom" secondItem="HAG-NF-7rh" secondAttribute="bottomMargin" id="PsB-xh-a7i"/>
+                                    <constraint firstItem="r29-Hw-zZO" firstAttribute="trailing" secondItem="HAG-NF-7rh" secondAttribute="trailingMargin" id="Pvc-KW-eC4"/>
+                                    <constraint firstItem="r29-Hw-zZO" firstAttribute="centerY" secondItem="HAG-NF-7rh" secondAttribute="centerY" id="cw2-Ih-ZvV"/>
+                                    <constraint firstItem="Toj-97-8o3" firstAttribute="top" secondItem="1bz-n9-TyD" secondAttribute="bottom" constant="-25.5" id="exB-sY-eWz"/>
+                                    <constraint firstItem="1bz-n9-TyD" firstAttribute="centerX" secondItem="Toj-97-8o3" secondAttribute="centerX" constant="-134" id="wVm-XF-Dls"/>
+                                    <constraint firstItem="Toj-97-8o3" firstAttribute="centerX" secondItem="HAG-NF-7rh" secondAttribute="centerX" id="zTb-fG-Ah8"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Z4x-st-67x" appends="YES" id="yKB-Sy-G0J"/>
+                                </connections>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3on-bf-sf7">
+                                <rect key="frame" x="0.0" y="0.0" width="84" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="85" id="7Sa-Dy-2Nb"/>
+                                    <constraint firstAttribute="width" constant="84" id="czK-wZ-sgr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZAE-YY-Fg8">
+                                <rect key="frame" x="409" y="339" width="238" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="238" id="voT-wO-bX9"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="CaptureMode"/>
+                                    <segment title="RecordMode"/>
+                                </segments>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="recordModeSegmentChange:" destination="Y5h-KL-TjC" eventType="valueChanged" id="fNW-vq-r3e"/>
+                                </connections>
+                            </segmentedControl>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="pEA-ve-nq6">
+                                <rect key="frame" x="20" y="337" width="140" height="30"/>
+                                <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9I-ld-OoE">
-                                        <rect key="frame" x="30" y="328" width="55" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
                                         <state key="normal" title="Capture">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="captureAction:" destination="Y5h-KL-TjC" eventType="touchUpInside" id="vbQ-LV-Yfi"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SI7-QX-ED8">
-                                        <rect key="frame" x="125" y="328" width="49" height="30"/>
+                                        <rect key="frame" x="85" y="0.0" width="55" height="30"/>
                                         <state key="normal" title="Record">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="recordAction:" destination="Y5h-KL-TjC" eventType="touchUpInside" id="x87-vL-DPX"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uyd-Jo-K9u">
+                                <rect key="frame" x="504" y="0.0" width="163" height="163"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ZAE-YY-Fg8" secondAttribute="trailing" constant="20" id="3kU-pO-hQ0"/>
-                                    <constraint firstItem="SI7-QX-ED8" firstAttribute="leading" secondItem="a9I-ld-OoE" secondAttribute="trailing" constant="40" id="A34-MR-sQc"/>
-                                    <constraint firstItem="a9I-ld-OoE" firstAttribute="bottom" secondItem="ZAE-YY-Fg8" secondAttribute="bottom" id="cg9-0f-8w1"/>
-                                    <constraint firstItem="SI7-QX-ED8" firstAttribute="bottom" secondItem="a9I-ld-OoE" secondAttribute="bottom" id="eA7-9m-pME"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZAE-YY-Fg8" secondAttribute="bottom" constant="17" id="ltM-TP-Nwl"/>
-                                    <constraint firstItem="a9I-ld-OoE" firstAttribute="leading" secondItem="HAG-NF-7rh" secondAttribute="leading" constant="30" id="vz5-pq-Anq"/>
+                                    <constraint firstAttribute="height" constant="163" id="FVv-oS-G22"/>
+                                    <constraint firstAttribute="width" constant="163" id="sN3-Vx-EiM"/>
                                 </constraints>
-                            </view>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3on-bf-sf7">
-                                <rect key="frame" x="-20" y="28" width="667" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3on-bf-sf7" firstAttribute="top" secondItem="oFq-A1-eWo" secondAttribute="bottom" constant="8" id="AfX-wy-a54"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3on-bf-sf7" secondAttribute="trailing" id="An5-2N-Jvj"/>
-                            <constraint firstItem="3on-bf-sf7" firstAttribute="trailing" secondItem="ZAE-YY-Fg8" secondAttribute="trailing" id="EHo-FQ-sAI"/>
-                            <constraint firstItem="HAG-NF-7rh" firstAttribute="centerY" secondItem="KIO-0w-lqp" secondAttribute="centerY" id="IZS-A2-zxV"/>
-                            <constraint firstItem="3on-bf-sf7" firstAttribute="width" secondItem="HAG-NF-7rh" secondAttribute="width" id="Ihg-B6-fac"/>
-                            <constraint firstItem="HAG-NF-7rh" firstAttribute="top" secondItem="3on-bf-sf7" secondAttribute="bottom" constant="-49" id="O5R-se-GMi"/>
-                            <constraint firstAttribute="width" secondItem="HAG-NF-7rh" secondAttribute="width" id="aAl-Xa-bIL"/>
-                            <constraint firstItem="HAG-NF-7rh" firstAttribute="height" secondItem="KIO-0w-lqp" secondAttribute="height" id="txo-55-GZK"/>
+                            <constraint firstItem="HAG-NF-7rh" firstAttribute="bottom" secondItem="eiZ-M7-BsQ" secondAttribute="top" id="0xL-2V-WCZ"/>
+                            <constraint firstItem="Uyd-Jo-K9u" firstAttribute="top" secondItem="3on-bf-sf7" secondAttribute="top" id="7SY-F4-DOf"/>
+                            <constraint firstItem="HAG-NF-7rh" firstAttribute="trailing" secondItem="Uyd-Jo-K9u" secondAttribute="trailing" id="7m2-i1-oMv"/>
+                            <constraint firstItem="eiZ-M7-BsQ" firstAttribute="top" secondItem="ZAE-YY-Fg8" secondAttribute="bottom" constant="8" symbolic="YES" id="Cel-gd-vMR"/>
+                            <constraint firstItem="HAG-NF-7rh" firstAttribute="leading" secondItem="3on-bf-sf7" secondAttribute="leading" id="GTG-vZ-uRo"/>
+                            <constraint firstItem="HAG-NF-7rh" firstAttribute="top" secondItem="KIO-0w-lqp" secondAttribute="top" id="Ng7-R9-CjX"/>
+                            <constraint firstAttribute="trailing" secondItem="Uyd-Jo-K9u" secondAttribute="trailing" id="OFh-Yr-9SU"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="a9I-ld-OoE" secondAttribute="leading" id="dGd-Mn-yOk"/>
+                            <constraint firstItem="HAG-NF-7rh" firstAttribute="top" secondItem="Uyd-Jo-K9u" secondAttribute="top" id="dHA-JD-zjF"/>
+                            <constraint firstItem="eiZ-M7-BsQ" firstAttribute="top" secondItem="pEA-ve-nq6" secondAttribute="bottom" constant="8" symbolic="YES" id="gMJ-0U-GhD"/>
+                            <constraint firstItem="HAG-NF-7rh" firstAttribute="leading" secondItem="KIO-0w-lqp" secondAttribute="leading" id="hGK-t8-jcF"/>
+                            <constraint firstItem="ZAE-YY-Fg8" firstAttribute="trailing" secondItem="KIO-0w-lqp" secondAttribute="trailingMargin" id="zjQ-CG-VS5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="J1c-zF-EhE"/>
                     <connections>
+                        <outlet property="blurLabel" destination="r29-Hw-zZO" id="XLw-Fw-iL1"/>
                         <outlet property="captureButton" destination="a9I-ld-OoE" id="2l4-wQ-2bZ"/>
                         <outlet property="fpvView" destination="HAG-NF-7rh" id="CtQ-C3-XvJ"/>
                         <outlet property="recordButton" destination="SI7-QX-ED8" id="7lN-5J-eZZ"/>
                         <outlet property="recordModeSegmentControl" destination="ZAE-YY-Fg8" id="jgC-oC-8wD"/>
                         <outlet property="recordTimeLabel" destination="3on-bf-sf7" id="a0h-xU-wu6"/>
+                        <outlet property="snapshotView" destination="Uyd-Jo-K9u" id="Sgm-W1-Raj"/>
+                        <outlet property="thresholdLabel" destination="1bz-n9-TyD" id="p7l-eF-xLz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spR-T1-rIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Z4x-st-67x">
+                    <connections>
+                        <action selector="tapAction:" destination="Y5h-KL-TjC" id="dkf-e1-8Ok"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="942.27886056971522" y="-248.80000000000001"/>
+            <point key="canvasLocation" x="858" y="-407"/>
         </scene>
     </scenes>
 </document>
