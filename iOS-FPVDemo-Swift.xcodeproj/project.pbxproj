@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		88E209A11F4AA3C800457198 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88E209A01F4AA3C800457198 /* OpenCVWrapper.mm */; };
-		88E209B01F4AA8D200457198 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E209AF1F4AA8D200457198 /* opencv2.framework */; };
 		88E209B21F4AA8ED00457198 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E209B11F4AA8ED00457198 /* libc++.tbd */; };
 		88E209B41F4AA8FF00457198 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E209B31F4AA8FF00457198 /* CoreMedia.framework */; };
 		88E209B61F4AA90A00457198 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E209B51F4AA90A00457198 /* AVFoundation.framework */; };
 		88E209B81F4AA91500457198 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E209B71F4AA91500457198 /* CoreVideo.framework */; };
 		88E209BD1F4AA98000457198 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E209B91F4AA93A00457198 /* AssetsLibrary.framework */; };
+		88E209C21F4AB03400457198 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E209C11F4AB03400457198 /* opencv2.framework */; };
 		986E4DD81EC4EEFC0094EAD3 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B5E95C1EC4D72D00A66949 /* VideoPreviewer.framework */; };
 		986E4DD91EC4EEFC0094EAD3 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98B5E95C1EC4D72D00A66949 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98B817F71EBB7C2200D9EBA1 /* FPVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B817F61EBB7C2200D9EBA1 /* FPVViewController.swift */; };
@@ -63,13 +63,13 @@
 		88E2099E1F4AA3C700457198 /* iOS-FPVDemo-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS-FPVDemo-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		88E2099F1F4AA3C800457198 /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		88E209A01F4AA3C800457198 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
-		88E209AF1F4AA8D200457198 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		88E209B11F4AA8ED00457198 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		88E209B31F4AA8FF00457198 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		88E209B51F4AA90A00457198 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		88E209B71F4AA91500457198 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		88E209B91F4AA93A00457198 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		88E209BB1F4AA97400457198 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		88E209C11F4AB03400457198 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		98B817F61EBB7C2200D9EBA1 /* FPVViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FPVViewController.swift; path = "iOS-FPVDemo-Swift/FPVViewController.swift"; sourceTree = SOURCE_ROOT; };
 		A435F1F41E8BD60900D58045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "iOS-FPVDemo-Swift/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		A435F1F61E8BD60900D58045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "iOS-FPVDemo-Swift/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -85,12 +85,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88E209C21F4AB03400457198 /* opencv2.framework in Frameworks */,
 				88E209BD1F4AA98000457198 /* AssetsLibrary.framework in Frameworks */,
 				88E209B81F4AA91500457198 /* CoreVideo.framework in Frameworks */,
 				88E209B61F4AA90A00457198 /* AVFoundation.framework in Frameworks */,
 				88E209B41F4AA8FF00457198 /* CoreMedia.framework in Frameworks */,
 				88E209B21F4AA8ED00457198 /* libc++.tbd in Frameworks */,
-				88E209B01F4AA8D200457198 /* opencv2.framework in Frameworks */,
 				B06EA971D6515087DA6C15DE /* libPods-iOS-FPVDemo-Swift.a in Frameworks */,
 				986E4DD81EC4EEFC0094EAD3 /* VideoPreviewer.framework in Frameworks */,
 			);
@@ -102,13 +102,13 @@
 		0B6F263FBC093B7B6FB6EF51 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88E209C11F4AB03400457198 /* opencv2.framework */,
 				88E209BB1F4AA97400457198 /* Photos.framework */,
 				88E209B91F4AA93A00457198 /* AssetsLibrary.framework */,
 				88E209B71F4AA91500457198 /* CoreVideo.framework */,
 				88E209B51F4AA90A00457198 /* AVFoundation.framework */,
 				88E209B31F4AA8FF00457198 /* CoreMedia.framework */,
 				88E209B11F4AA8ED00457198 /* libc++.tbd */,
-				88E209AF1F4AA8D200457198 /* opencv2.framework */,
 				A435F2111E8BD6BF00D58045 /* VideoPreviewer.xcodeproj */,
 				BA6806BA82A93F6159B12D3F /* libPods-iOS-FPVDemo-Swift.a */,
 			);
